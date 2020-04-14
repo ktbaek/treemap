@@ -1,3 +1,6 @@
+library(tidyverse)
+library(magrittr)
+
 #read data
 kk_trees_all <- read_csv('../data/trae_basis.csv')
 

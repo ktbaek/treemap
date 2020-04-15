@@ -17,6 +17,9 @@ kk_trees_all %<>%
   separate(geometry, c(NA, "lon", "lat"), sep = " ") %>%
   mutate(lon = as.double(lon), lat = as.double(lat))
 
+#change planteaar 0 to NA
+kk_trees_all %<>% mutate(planteaar = ifelse(planteaar == 0, NA, planteaar))
+
 #create species_genus dataframe to get an overview of genus and species names
 species_genus <- kk_trees_all %>% group_by(traeart, dansk_navn, slaegtsnavn) %>% summarize(antal = n())
 species_genus %<>% separate(traeart, into = "genus", sep = " ", remove = FALSE)

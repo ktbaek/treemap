@@ -8,7 +8,8 @@ kk_trees_all <- read_csv('../data/trae_basis.csv')
 kk_trees_all %<>% 
   rename(geometry = wkb_geometry, fredet = fredet_beskyttet_trae) %>%
   select(traeart,dansk_navn, slaegtsnavn, planteaar, fredet, geometry) %>%
-  mutate(fredet = ifelse(fredet == "Ikke registreret", "", fredet))
+  mutate(fredet = ifelse(fredet == "Ikke registreret", "", fredet),
+         saerligt_trae = ifelse(saerligt_trae == "nej", "", "Særligt træ"))
 
 #seperate geometry column into lon and lat columns
 kk_trees_all$geometry <- gsub("\\(|\\)", "", kk_trees_all$geometry)

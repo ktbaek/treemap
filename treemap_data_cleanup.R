@@ -137,7 +137,7 @@ genus_names_2 <- c("Ægte kastanie" = "Kastanje (Castanea)",
                    "Lærk" = "Lærk (Larix)",
                    "Lind" = "Lind (Tilia)",
                    "Løn" = "Løn (Acer)",
-                   "Pil" = "Pil (Salicaceae)",
+                   "Pil" = "Pil (Salix)",
                    "Platan" = "Platan (Platanus)",
                    "Poppel" = "Poppel (Populus)",
                    "Robinie" = "Robinie (Robinia)",
@@ -161,7 +161,7 @@ kk_trees_all %<>% full_join(genus_lookup_2, by = c("slaegtsnavn", "traeart")) %>
 
 #split species column into species and cultivar columns
 kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "'", remove = FALSE)
-kk_trees$art <- gsub("(^[[:space:]]+|[[:space:]]+$)", "", kk_trees$art) #remove trailing spaces
+kk_trees_all$art <- gsub("(^[[:space:]]+|[[:space:]]+$)", "", kk_trees_all$art) #remove trailing spaces
 
 #check results are ok
 species_genus_check <- kk_trees_all %>% group_by(traeart, dansk_navn, slaegtsnavn, slaegtsnavn_rettet) %>% summarize(antal = n())

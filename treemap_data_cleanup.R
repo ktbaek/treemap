@@ -164,7 +164,7 @@ kk_trees_all %<>% full_join(genus_lookup_2, by = c("slaegtsnavn", "traeart")) %>
   select(-slaegtsnavn_rettet.x, -slaegtsnavn_rettet.y)
 
 #split species column into species and cultivar columns
-kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "'", remove = FALSE)
+kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "([\\'\\\"])", remove = FALSE)
 kk_trees_all$art <- gsub("(^[[:space:]]+|[[:space:]]+$)", "", kk_trees_all$art) #remove trailing spaces
 
 #check results are ok

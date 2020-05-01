@@ -37,6 +37,19 @@ kk_trees_all$traeart <- gsub("ý", "y", kk_trees_all$traeart)
 #correct spelling
 kk_trees_all$dansk_navn <- gsub("astanie", "astanje", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("ortebrik", "ortebirk", kk_trees_all$dansk_navn)
+kk_trees_all$traeart <- gsub("pensylvanica", "pennsylvanica", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Prunus ceracifera", "Prunus cerasifera", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Prunus mackii", "Prunus maackii", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Almus inceana", "Alnus inceana", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Amelachier canadensis", "Amelanchier canadensis", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Tilia plathyphyllos", "Tilia platyphyllos", kk_trees_all$traeart)
+
+#change species names. Based on qualified guesses
+kk_trees_all$traeart <- gsub("Aesculus hippoc.[[:space:]]", "Aesculus hippocastanum", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Acer pseudoplatanoides", "Acer pseudoplatanus", kk_trees_all$traeart) #could also be Acer platanoides 
+kk_trees_all$traeart <- gsub("Malus '", "Malus domestica '", kk_trees_all$traeart)  
+kk_trees_all$traeart <- gsub("Malus x ", "Malus domestica ", kk_trees_all$traeart) 
+kk_trees_all$traeart <- gsub("Malus hybrid Hyslop", "Malus hybr. 'Hyslop'", kk_trees_all$traeart) 
 
 #create look-up table with corrected genus names based on existing names as they appear in the KK data
 genus_names <- c("Abies" = "Ædelgran (Abies)",
@@ -163,8 +176,9 @@ kk_trees_all %<>% full_join(genus_lookup_2, by = c("slaegtsnavn", "traeart")) %>
   mutate(slaegtsnavn_rettet = coalesce(slaegtsnavn_rettet.x, slaegtsnavn_rettet.y)) %>% 
   select(-slaegtsnavn_rettet.x, -slaegtsnavn_rettet.y)
 
-#split species column into species and cultivar columns
+#split species column into species and cultivar/variant columns
 kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "([\\'\\\"])", remove = FALSE)
+kk_trees_all %<>% separate(art, c("art", "variant"), sep = "(?=[[:blank:]]var\\.[[:blank:]]|[[:blank:]]f\\.[[:blank:]]|[[:blank:]]fk[[:blank:]])", remove = TRUE)
 kk_trees_all$art <- gsub("(^[[:space:]]+|[[:space:]]+$)", "", kk_trees_all$art) #remove trailing spaces
 
 #check results are ok
@@ -175,6 +189,9 @@ antal <- kk_trees_all %>% count(dansk_navn)
 
 kk_trees_all %<>%
   inner_join(antal, by = "dansk_navn") 
+
+kk_trees_all %<>%
+  filter(!is.na(id))
 
 #save tidy dataset
 saveRDS(kk_trees_all, file = 'treemap/kk_trees_all.RDS')

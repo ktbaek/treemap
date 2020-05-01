@@ -25,7 +25,7 @@ kk_trees_all %<>% mutate(planteaar = ifelse(planteaar == 0, NA, planteaar))
 species_genus <- kk_trees_all %>% group_by(traeart, dansk_navn, slaegtsnavn) %>% summarize(antal = n())
 species_genus %<>% separate(traeart, into = "genus", sep = " ", remove = FALSE)
 
-#replace weird vowels
+#replace weird vowels in latin names
 kk_trees_all$traeart <- gsub("Á", "A", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("á", "a", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("é", "e", kk_trees_all$traeart)
@@ -33,6 +33,10 @@ kk_trees_all$traeart <- gsub("í", "i", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("ó", "o", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("ú", "u", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("ý", "y", kk_trees_all$traeart)
+
+#correct spelling
+kk_trees_all$dansk_navn <- gsub("astanie", "astanje", kk_trees_all$dansk_navn)
+kk_trees_all$dansk_navn <- gsub("ortebrik", "ortebirk", kk_trees_all$dansk_navn)
 
 #create look-up table with corrected genus names based on existing names as they appear in the KK data
 genus_names <- c("Abies" = "Ædelgran (Abies)",

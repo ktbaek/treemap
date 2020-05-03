@@ -51,6 +51,9 @@ kk_trees_all$traeart <- gsub("Malus '", "Malus domestica '", kk_trees_all$traear
 kk_trees_all$traeart <- gsub("Malus x ", "Malus domestica ", kk_trees_all$traeart) 
 kk_trees_all$traeart <- gsub("Malus hybrid Hyslop", "Malus hybr. 'Hyslop'", kk_trees_all$traeart) 
 
+#correct danish names to all start with upper case
+kk_trees_all %<>% mutate(dansk_navn = ifelse(is.na(dansk_navn), NA, paste0(toupper(substr(dansk_navn, 1, 1)), substr(dansk_navn, 2, nchar(dansk_navn)))))
+
 #create look-up table with corrected genus names based on existing names as they appear in the KK data
 genus_names <- c("Abies" = "Ædelgran (Abies)",
                  "Acer" = "Løn (Acer)",
@@ -180,6 +183,13 @@ kk_trees_all %<>% full_join(genus_lookup_2, by = c("slaegtsnavn", "traeart")) %>
 kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "([\\'\\\"])", remove = FALSE)
 kk_trees_all %<>% separate(art, c("art", "variant"), sep = "(?=[[:blank:]]var\\.[[:blank:]]|[[:blank:]]f\\.[[:blank:]]|[[:blank:]]fk[[:blank:]])", remove = TRUE)
 kk_trees_all$art <- gsub("(^[[:space:]]+|[[:space:]]+$)", "", kk_trees_all$art) #remove trailing spaces
+
+#correct some danish names
+kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engriflet Hvidtjørn", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus canadensis", "Canadisk poppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus canescens", "Gråpoppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus trichocarpa", "Vestamerikansk balsampoppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Pyrus caucasica", "Prydpære", dansk_navn))
 
 #check results are ok
 species_genus_check <- kk_trees_all %>% group_by(traeart, dansk_navn, slaegtsnavn, slaegtsnavn_rettet) %>% summarize(antal = n())

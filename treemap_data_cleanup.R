@@ -50,6 +50,7 @@ kk_trees_all$traeart <- gsub("Acer pseudoplatanoides", "Acer pseudoplatanus", kk
 kk_trees_all$traeart <- gsub("Malus '", "Malus domestica '", kk_trees_all$traeart)  
 kk_trees_all$traeart <- gsub("Malus x ", "Malus domestica ", kk_trees_all$traeart) 
 kk_trees_all$traeart <- gsub("Malus hybrid Hyslop", "Malus hybr. 'Hyslop'", kk_trees_all$traeart) 
+kk_trees_all$traeart <- gsub("Aesculus carnea", "Aesculus hybr. carnea", kk_trees_all$traeart)
 
 #correct danish names to all start with upper case
 kk_trees_all %<>% mutate(dansk_navn = ifelse(is.na(dansk_navn), NA, paste0(toupper(substr(dansk_navn, 1, 1)), substr(dansk_navn, 2, nchar(dansk_navn)))))

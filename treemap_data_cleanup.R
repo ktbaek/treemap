@@ -212,8 +212,8 @@ kk_trees_all %<>% full_join(genus_lookup_2, by = c("slaegtsnavn", "traeart")) %>
 species_check <- kk_trees_all %>% group_by(art, variant, sort, dansk_navn) %>% summarize(antal = n())
 species_genus_check <- kk_trees_all %>% group_by(traeart, art, dansk_navn, slaegtsnavn, slaegtsnavn_rettet) %>% summarize(antal = n())
 
-#add species counts
-antal <- kk_trees_all %>% count(art)
+#add species counts and species-id
+antal <- kk_trees_all %>% count(art) %>% mutate("art_nr" = row_number())
 
 kk_trees_all %<>%
   inner_join(antal, by = "art") 

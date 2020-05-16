@@ -21,10 +21,6 @@ kk_trees_all %<>%
 #change planteaar 0 to NA
 kk_trees_all %<>% mutate(planteaar = ifelse(planteaar == 0, NA, planteaar))
 
-#create species_genus dataframe to get an overview of genus and species names
-species_genus <- kk_trees_all %>% group_by(traeart, dansk_navn, slaegtsnavn) %>% summarize(antal = n())
-species_genus %<>% separate(traeart, into = "genus", sep = " ", remove = FALSE)
-
 #replace weird vowels in latin names
 kk_trees_all$traeart <- gsub("Á", "A", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("á", "a", kk_trees_all$traeart)

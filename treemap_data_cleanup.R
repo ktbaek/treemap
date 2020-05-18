@@ -46,6 +46,8 @@ kk_trees_all$traeart <- gsub("Malus x ", "Malus domestica ", kk_trees_all$traear
 kk_trees_all$traeart <- gsub("Malus hybrid Hyslop", "Malus hybr. 'Hyslop'", kk_trees_all$traeart) 
 kk_trees_all$traeart <- gsub("Aesculus carnea", "Aesculus hybr. carnea", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("Ginkgo sp.", "Ginkgo biloba", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Metasequoia sp.", "Metasequoia glyptostroboides", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Tilia europaea", "Tilia hybr. europaea", kk_trees_all$traeart)
 
 #split species column into species and cultivar/variant columns
 kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "([\\'\\\"])", remove = FALSE)
@@ -60,7 +62,9 @@ kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engri
                          dansk_navn = ifelse(art == "Populus canadensis", "Canadisk poppel", dansk_navn),
                          dansk_navn = ifelse(art == "Populus canescens", "Gråpoppel", dansk_navn),
                          dansk_navn = ifelse(art == "Populus trichocarpa", "Vestamerikansk balsampoppel", dansk_navn),
-                         dansk_navn = ifelse(art == "Pyrus caucasica", "Prydpære", dansk_navn))
+                         dansk_navn = ifelse(art == "Pyrus caucasica", "Prydpære", dansk_navn),
+                         dansk_navn = ifelse(traeart == "Betula pendula 'Dalecarlica'", "Fligbladet birk (pollenfri)", dansk_navn),
+                         dansk_navn = ifelse(traeart == "Acer platanoides 'Olmsted'", "'Olmsted' spidsløn", dansk_navn))
 
 #correct danish name spelling
 kk_trees_all$dansk_navn <- gsub("astanie", "astanje", kk_trees_all$dansk_navn)

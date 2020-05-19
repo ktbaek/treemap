@@ -64,7 +64,11 @@ kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engri
                          dansk_navn = ifelse(art == "Populus trichocarpa", "Vestamerikansk balsampoppel", dansk_navn),
                          dansk_navn = ifelse(art == "Pyrus caucasica", "Prydpære", dansk_navn),
                          dansk_navn = ifelse(traeart == "Betula pendula 'Dalecarlica'", "Fligbladet birk (pollenfri)", dansk_navn),
-                         dansk_navn = ifelse(traeart == "Acer platanoides 'Olmsted'", "'Olmsted' spidsløn", dansk_navn))
+                         dansk_navn = ifelse(traeart == "Acer platanoides 'Olmsted'", "'Olmsted' spidsløn", dansk_navn),
+                         dansk_navn = ifelse(art == "Prunus umineko", "Prydkirsebær", dansk_navn),
+                         dansk_navn = ifelse(art == "Thuja occidentalis", "Almindelig thuja", dansk_navn),
+                         dansk_navn = ifelse(art == "Malus sieboldii", "Japansk Prydæble", dansk_navn))
+)
 
 #correct danish name spelling
 kk_trees_all$dansk_navn <- gsub("astanie", "astanje", kk_trees_all$dansk_navn)
@@ -83,6 +87,7 @@ kk_trees_all$dansk_navn <- gsub("Selje pil", "Seljepil", kk_trees_all$dansk_navn
 kk_trees_all$dansk_navn <- gsub("Purpur pil", "Purpurpil", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Skærm elm", "Skærm-elm", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Gingko", "Tempeltræ", kk_trees_all$dansk_navn)
+kk_trees_all$dansk_navn <- gsub("Paradisæbel", "Paradisæble", kk_trees_all$dansk_navn)
 
 #create look-up table with corrected genus names based on existing names as they appear in the KK data
 genus_names <- c("Abies" = "Ædelgran (Abies)",

@@ -71,7 +71,7 @@ kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engri
                          dansk_navn = ifelse(traeart == "Acer platanoides 'Olmsted'", "'Olmsted' spidsløn", dansk_navn),
                          dansk_navn = ifelse(art == "Prunus umineko", "Prydkirsebær", dansk_navn),
                          dansk_navn = ifelse(art == "Thuja occidentalis", "Almindelig thuja", dansk_navn),
-                         dansk_navn = ifelse(art == "Malus sieboldii", "Japansk Prydæble", dansk_navn))
+                         dansk_navn = ifelse(art == "Malus sieboldii", "Japansk prydæble", dansk_navn))
 )
 
 #correct danish name spelling

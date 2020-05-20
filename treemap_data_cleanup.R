@@ -48,6 +48,9 @@ kk_trees_all$traeart <- gsub("Aesculus carnea", "Aesculus hybr. carnea", kk_tree
 kk_trees_all$traeart <- gsub("Ginkgo sp.", "Ginkgo biloba", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("Metasequoia sp.", "Metasequoia glyptostroboides", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("Tilia europaea", "Tilia hybr. europaea", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Populus canadensis", "Populus hybr. canadensis", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Populus canescens", "Populus hybr. canescens", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Populus gileadensis", "Populus hybr. gileadensis", kk_trees_all$traeart)
 
 #split species column into species and cultivar/variant columns
 kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "([\\'\\\"])", remove = FALSE)
@@ -59,9 +62,10 @@ kk_trees_all %<>% mutate(dansk_navn = ifelse(is.na(dansk_navn), NA, ifelse(str_d
 
 #correct some danish names based on latin names
 kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engriflet hvidtjørn", dansk_navn),
-                         dansk_navn = ifelse(art == "Populus canadensis", "Canadisk poppel", dansk_navn),
-                         dansk_navn = ifelse(art == "Populus canescens", "Gråpoppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus hybr. canadensis", "Canadisk poppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus hybr. canescens", "Gråpoppel", dansk_navn),
                          dansk_navn = ifelse(art == "Populus trichocarpa", "Vestamerikansk balsampoppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus hybr. gileadensis", "Ontarisk poppel", dansk_navn),
                          dansk_navn = ifelse(art == "Pyrus caucasica", "Prydpære", dansk_navn),
                          dansk_navn = ifelse(traeart == "Betula pendula 'Dalecarlica'", "Fligbladet birk (pollenfri)", dansk_navn),
                          dansk_navn = ifelse(traeart == "Acer platanoides 'Olmsted'", "'Olmsted' spidsløn", dansk_navn),

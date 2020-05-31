@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
 from math import sqrt, cos, asin, isnan
 import numpy as np
 import random

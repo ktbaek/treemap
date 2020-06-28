@@ -71,8 +71,13 @@ kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engri
                          dansk_navn = ifelse(traeart == "Acer platanoides 'Olmsted'", "'Olmsted' spidsløn", dansk_navn),
                          dansk_navn = ifelse(art == "Prunus umineko", "Prydkirsebær", dansk_navn),
                          dansk_navn = ifelse(art == "Thuja occidentalis", "Almindelig thuja", dansk_navn),
-                         dansk_navn = ifelse(art == "Malus sieboldii", "Japansk prydæble", dansk_navn))
+                         dansk_navn = ifelse(art == "Malus sieboldii", "Japansk prydæble", dansk_navn),
+                         art = ifelse(dansk_navn == "Blomme 'Italiensk sveske'", "Prunus domestica", art))
 )
+
+#correct elm names
+kk_trees_all$art <- gsub("Ulmus$", "Ulmus hybr.", kk_trees_all$art)
+kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Ulmus hybr.", paste0("Elm '", sort, "'"), dansk_navn))
 
 #correct danish name spelling
 kk_trees_all$dansk_navn <- gsub("astanie", "astanje", kk_trees_all$dansk_navn)
@@ -80,7 +85,8 @@ kk_trees_all$dansk_navn <- gsub("ortebrik", "ortebirk", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Smallbladet sølvblad", "Smalbladet sølvblad", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Vingevalnød sp", "Vingevalnød", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Kugle ahorn", "Kugleahorn", kk_trees_all$dansk_navn)
-kk_trees_all$dansk_navn <- gsub("Grå el", "Grå-el", kk_trees_all$dansk_navn)
+kk_trees_all$dansk_navn <- gsub("Grå el", "Gråel", kk_trees_all$dansk_navn)
+kk_trees_all$dansk_navn <- gsub("Rød-el", "Rødel", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Pyramide avnbøg", "Pyramideavnbøg", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Hænge ask", "Hængeask", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Manna ask", "Manna-ask", kk_trees_all$dansk_navn)
@@ -89,7 +95,7 @@ kk_trees_all$dansk_navn <- gsub("Turner eg", "Turner-eg", kk_trees_all$dansk_nav
 kk_trees_all$dansk_navn <- gsub("Pragt robinie", "Pragtrobinie", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Selje pil", "Seljepil", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Purpur pil", "Purpurpil", kk_trees_all$dansk_navn)
-kk_trees_all$dansk_navn <- gsub("Skærm elm", "Skærm-elm", kk_trees_all$dansk_navn)
+kk_trees_all$dansk_navn <- gsub("Skærm elm", "Skærmelm", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Gingko", "Tempeltræ", kk_trees_all$dansk_navn)
 kk_trees_all$dansk_navn <- gsub("Paradisæbel", "Paradisæble", kk_trees_all$dansk_navn)
 

@@ -62,7 +62,7 @@ kk_trees_all %<>% mutate(dansk_navn = ifelse(is.na(dansk_navn), NA, ifelse(str_d
 
 #correct some danish names based on latin names
 kk_trees_all %<>% mutate(dansk_navn = ifelse(art == "Crataegus monogyna", "Engriflet hvidtjørn", dansk_navn),
-                         dansk_navn = ifelse(art == "Populus hybr. canadensis", "Canadisk poppel", dansk_navn),
+                         dansk_navn = ifelse(art == "Populus hybr. canadensis", "Landevejspoppel", dansk_navn),
                          dansk_navn = ifelse(art == "Populus hybr. canescens", "Gråpoppel", dansk_navn),
                          dansk_navn = ifelse(art == "Populus trichocarpa", "Vestamerikansk balsampoppel", dansk_navn),
                          dansk_navn = ifelse(art == "Populus hybr. gileadensis", "Ontarisk poppel", dansk_navn),

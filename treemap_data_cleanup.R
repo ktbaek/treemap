@@ -51,6 +51,8 @@ kk_trees_all$traeart <- gsub("Tilia europaea", "Tilia hybr. europaea", kk_trees_
 kk_trees_all$traeart <- gsub("Populus canadensis", "Populus hybr. canadensis", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("Populus canescens", "Populus hybr. canescens", kk_trees_all$traeart)
 kk_trees_all$traeart <- gsub("Populus gileadensis", "Populus hybr. gileadensis", kk_trees_all$traeart)
+kk_trees_all$traeart <- gsub("Sorbus hybrida", "Sorbus hybr. hybrida", kk_trees_all$traeart)  
+kk_trees_all$traeart <- gsub("Sorbus commi'xta 'Dodong'", "Sorbus commixta 'Dodong'", kk_trees_all$traeart)
 
 #split species column into species and cultivar/variant columns
 kk_trees_all %<>% separate(traeart, c("art", "sort"), sep = "([\\'\\\"])", remove = FALSE)

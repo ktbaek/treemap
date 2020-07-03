@@ -31,7 +31,7 @@ def nearest(trees, query):
 
 
 #function to insert trees of one species into an already existing graph
-def insert_species_into(trees, graph, age_reward_factor = 0.02, set_na_to = 1990):
+def insert_species_into(trees, graph, age_reward_factor = 0.02, set_na_to = 1980):
 
     #Test if input is ok
     included_species = [tree.sp for tree in graph.keys()]

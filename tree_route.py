@@ -253,7 +253,7 @@ show_tour(initial_route)
 
 # #### Insert remaining trees into initial route
 
-whole_route = insert_trees(initial_route, all_trees, age_reward_factor = 5)
+whole_route = insert_trees(initial_route, all_trees, age_reward_factor = 0.02)
 show_tour(whole_route)
 
 
